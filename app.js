@@ -4,8 +4,9 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
+const expressValidator = require("express-validator")
 
-const userRoute = require("./routes/user")
+const authRoutes = require("./routes/auth")
 
 
 //app
@@ -24,9 +25,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(morgan('dev')) //log HTTP requests
+app.use(expressValidator())//email,name,password validation
     
 //route middlewares
-app.use("/api",userRoute);
+app.use("/api",authRoutes);
 
 
 app.listen(port,(req,res)=>{
