@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Get unique error field name
+ * Get unique error field name  (ie email which is defined as unique)
  */
 const uniqueMessage = error => {
     let output;
