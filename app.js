@@ -7,6 +7,7 @@ const morgan = require("morgan")
 const expressValidator = require("express-validator")
 
 const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/user")
 
 
 //app
@@ -29,6 +30,7 @@ app.use(expressValidator())//email,name,password validation
     
 //route middlewares
 app.use("/api",authRoutes);
+app.use("/api",userRoutes);
 
 
 app.listen(port,(req,res)=>{
