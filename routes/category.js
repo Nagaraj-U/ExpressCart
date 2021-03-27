@@ -1,12 +1,19 @@
 const express = require("express")
 const router = express.Router()
 
-const {create} = require("../controllers/category")
+const {create,categoryById,read,list,update,remove} = require("../controllers/category")
 const {requireSignin,isAuth,isAdmin} = require("../controllers/auth")
-const {findById} = require("../controllers/user")
+const {userById} = require("../controllers/user")
 
 
-router.param("userId",findById); //find user id from params and create req.profile
+router.get("/category/:categoryId",read)
+router.get("/categories",list)
 router.post("/category/create/:userId",requireSignin,isAdmin,isAuth,create);
+router.delete("/category/:categoryId/:userId",requireSignin,isAdmin,isAuth,remove);
+router.put("/category/:categoryId/:userId",requireSignin,isAdmin,isAuth,update);
+
+
+router.param("userId",userById); //find user id from params and create req.profile
+router.param("categoryId",categoryById)
 
 module.exports = router
