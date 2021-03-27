@@ -1,10 +1,15 @@
 const express = require("express")
 const router = express.Router()
 const {requireSignin,isAdmin,isAuth} = require("../controllers/auth")
-const {findById} = require("../controllers/user")
-const {create} = require("../controllers/product")
+const {userById} = require("../controllers/user")
+const {create,productById,read,remove,update} = require("../controllers/product")
 
-router.param("userId",findById); //creates user profile
+router.get("/product/:productId",read)
 router.post("/product/create/:userId",requireSignin,isAdmin,isAuth,create)
+router.delete("/product/:productId/:userId",requireSignin,isAdmin,isAuth,remove)
+router.put("/product/:productId/:userId",update)
+
+router.param("userId",userById); //creates user profile
+router.param("productId",productById); //creates product profile
 
 module.exports = router
