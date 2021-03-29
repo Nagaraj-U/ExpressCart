@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const expressValidator = require("express-validator")
+const cors = require("cors")
 
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(morgan('dev')) //log HTTP requests
 app.use(expressValidator())//email,name,password validation
+app.use(cors()) //helps to handle requests coming from different ports
     
 //route middlewares
 app.use("/api",authRoutes);
