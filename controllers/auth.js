@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken") //to generate signin token
 const expressJwt = require("express-jwt") //to authorization of signin
 const {errorHandler} = require("../helpers/dbErrorHandler")
 
+
 exports.signup = (req,res)=>{
    const user = new User(req.body)
    user.save((err,user)=>{
