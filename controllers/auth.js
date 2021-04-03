@@ -3,14 +3,13 @@ const jwt = require("jsonwebtoken") //to generate signin token
 const expressJwt = require("express-jwt") //to authorization of signin
 const {errorHandler} = require("../helpers/dbErrorHandler")
 
-
 exports.signup = (req,res)=>{
    const user = new User(req.body)
    user.save((err,user)=>{
        if(err){
             return res.status(400).json(
                 {
-                    err : errorHandler(err)
+                    error : errorHandler(err)
                 })
        }
        //hiding fields in response
@@ -24,7 +23,7 @@ exports.signin = (req,res)=>{
     const {email,password} = req.body;
     User.findOne({email},(err,user)=>{
         if(err || !user){
-            res.status(400).json({error : "User doesn't exist !"})
+            return res.status(400).json({error : "User doesn't exist !"})
         }
 
         //if user found check password and email match
