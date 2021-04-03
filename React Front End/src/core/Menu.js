@@ -1,5 +1,6 @@
-import React from "react"
+import React, { Fragment } from "react"
 import {Link,withRouter} from "react-router-dom"
+import { isAuthenticated, signout } from "../auth"
 
 //highlighting current page with different color in navbar
 const isActive = (history,path)=>{  //hisory : comes with props ,  path : manually sending path 
@@ -20,13 +21,28 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
                     <Link className="nav-link" to="/" style={isActive(props.history,"/")}>Home</Link>
                 </li>
 
-                <li className="nav-item">
-                    <Link className="nav-link" to="/signin" style={isActive(props.history,"/signin")}>Login</Link>
-                </li>
+                {!isAuthenticated() && (
+                    <Fragment>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signin" style={isActive(props.history,"/signin")}>Login</Link>
+                        </li>
 
-                <li className="nav-item">
-                    <Link className="nav-link" to="/signup" style={isActive(props.history,"/signup")}>Signup</Link>
-                </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signup" style={isActive(props.history,"/signup")}>Signup</Link>
+                        </li>
+                    </Fragment>
+                )}
+
+                {isAuthenticated() && (
+                    <li className="nav-item">
+                    <span className="nav-link" onClick={()=>{
+                        signout(()=>{
+                            props.history.push("/")
+                        })
+                        }} style={{cursor : "pointer" , color : "#ffffff"}}>Signout</span>
+                     </li>
+                )}
+
             </ul>
         </div>
     )
