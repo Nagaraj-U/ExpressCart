@@ -17,12 +17,28 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
     return (
         <div>
             <ul className="nav nav-tabs bg-primary">
+
                 <li className="nav-item">
                     <Link className="nav-link" to="/" style={isActive(props.history,"/")}>Home</Link>
                 </li>
 
+                
+                {isAuthenticated() && isAuthenticated().user.role === 0 && (
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/user/dashboard" style={isActive(props.history,"/user/dashboard")}>Dashboard</Link>
+                    </li>
+                )}
+
+                {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/admin/dashboard" style={isActive(props.history,"/admin/dashboard")}>Dashboard</Link>
+                    </li>
+                )}
+
+
                 {!isAuthenticated() && (
                     <Fragment>
+
                         <li className="nav-item">
                             <Link className="nav-link" to="/signin" style={isActive(props.history,"/signin")}>Login</Link>
                         </li>
@@ -30,17 +46,24 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
                         <li className="nav-item">
                             <Link className="nav-link" to="/signup" style={isActive(props.history,"/signup")}>Signup</Link>
                         </li>
+
+                        
+
                     </Fragment>
                 )}
 
                 {isAuthenticated() && (
-                    <li className="nav-item">
-                    <span className="nav-link" onClick={()=>{
-                        signout(()=>{
-                            props.history.push("/")
-                        })
-                        }} style={{cursor : "pointer" , color : "#ffffff"}}>Signout</span>
-                     </li>
+                    <Fragment>
+                        <li className="nav-item">
+
+                        <span className="nav-link" onClick={()=>{
+                            signout(()=>{
+                                props.history.push("/")
+                            })
+                            }} style={{cursor : "pointer" , color : "#ffffff"}}>Signout</span>
+                    </li>
+
+                    </Fragment>
                 )}
 
             </ul>

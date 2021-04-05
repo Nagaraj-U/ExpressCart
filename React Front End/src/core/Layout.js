@@ -3,7 +3,7 @@ import Menu from "./Menu";
 
 //whatever is present in between <Layout> ...(children prop) </Layout>
 const Layout = ({
-  title = "Title",
+  title = "Title", //default values
   description = "Description",
   className,
   children,
