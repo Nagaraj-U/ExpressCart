@@ -47,8 +47,6 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
                             <Link className="nav-link" to="/signup" style={isActive(props.history,"/signup")}>Signup</Link>
                         </li>
 
-                        
-
                     </Fragment>
                 )}
 
@@ -61,7 +59,7 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
                                 props.history.push("/")
                             })
                             }} style={{cursor : "pointer" , color : "#ffffff"}}>Signout</span>
-                    </li>
+                        </li>
 
                     </Fragment>
                 )}

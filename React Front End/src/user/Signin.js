@@ -3,6 +3,10 @@ import Layout from "../core/Layout"
 import {Redirect} from "react-router-dom"
 import {authenticate, signin,isAuthenticated} from "../auth/index"
 
+/*
+authenticate : store jwt token in browser (set token)
+isAuthenticated : check wether token is present in client browser and return token (get token)
+ */
 
 const Signin = ()=>{
 
@@ -81,6 +85,7 @@ const Signin = ()=>{
             }
         }
 
+        //Redirecting user to home if he try to access admin dashboard
         if(isAuthenticated()){
             return <Redirect to="/" />
         }

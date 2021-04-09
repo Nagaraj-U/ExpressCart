@@ -15,7 +15,7 @@ const Signup = ()=>{
     })
     const {name,email,password,error,success} = values
     
-    //eventName can be "name","email","password"
+    //eventName can be "name","email","password"+  
     const handleChange = (name)=> (event) =>{
         setValues({...values , error:false , [name] : event.target.value}) //spread old values and update the current event , set error to false if user starts typing again
     }
