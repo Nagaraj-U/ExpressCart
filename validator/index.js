@@ -1,4 +1,4 @@
-//exoress validator
+//express validator
 exports.userSignupValidator = (req,res,next)=>{
     req.check("name","Name is required").notEmpty()
 
@@ -7,7 +7,7 @@ exports.userSignupValidator = (req,res,next)=>{
                 .withMessage("email should contain @ ")
                 .isLength({min : 4, max : 32})
 
-    req.check("password","password ir required").notEmpty()
+    req.check("password","password is required").notEmpty()
     req.check("password").isLength({min : 6})
                          .withMessage("password should be atleast 6 charecters")  //overrides default error msg
                          .matches(/\d/)

@@ -9,11 +9,12 @@ router.param("userId",userById); //grabs userid from route params (used in displ
 
 
 //authenticated user ,admin , signed in users can only access
-router.get("/user/:userId",requireSignin,isAuth,isAdmin,(req,res)=>{
-    res.json({
-        user : req.profile
-    })
-})
+
+// router.get("/user/:userId",requireSignin,isAuth,isAdmin,(req,res)=>{
+//     res.json({
+//         user : req.profile
+//     })
+// })
 
 router.get("/user/:userId",requireSignin,isAuth,read);
 router.put("/user/:userId",requireSignin,isAuth,update);

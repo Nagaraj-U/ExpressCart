@@ -51,10 +51,10 @@ exports.signout = (req,res)=>{
 }
 
 
-//middleware to verify json web tokens it automatically look for jwt
+//middleware to verify json web tokens it automatically look for jwt (IF NO AUTHORIZATION TOKEN then THROWS error)
 exports.requireSignin = expressJwt({  //requires cookie parser to be installed 
     secret : process.env.JWT_SECRET,
-    userProperty : "auth",  
+    userProperty : "auth",  //make auth property available in request obj , which we use below
     algorithms : ["HS256"]
 })
 

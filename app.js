@@ -21,7 +21,8 @@ const port = process.env.PORT || 3000
 mongoose.connect(process.env.DATABASE,
   { useNewUrlParser:true,
     useCreateIndex:true,
-    useUnifiedTopology:true}).then(()=>{console.log("database connected");});
+    useUnifiedTopology:true})
+    .then(()=>{console.log("database connected");});
 
 
 //middlewares
@@ -30,7 +31,7 @@ app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(morgan('dev')) //log HTTP requests
 app.use(expressValidator())//email,name,password validation
-app.use(cors()) //helps to handle requests coming from different ports
+app.use(cors()) //helps to handle requests coming from different ports (from frontend port)
     
 //route middlewares
 app.use("/api",authRoutes);

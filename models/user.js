@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.virtual('password')
 .set(function(password){   //get password from client and set
-    this._password = password,
+    this._password = password, //storing in temp var
     this.salt = uuidv4(),    //random string
     this.hashed_password = this.encyptPassword(password)
 })
