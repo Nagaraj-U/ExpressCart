@@ -1,8 +1,7 @@
 import React, { useState , useEffect} from "react";
 import { isAuthenticated } from "../auth";
 import Layout from "../core/Layout";
-// import { Link } from "react-router-dom";
-import { createProduct } from "./apiAdmin";
+import { createProduct , getCategories } from "./apiAdmin";
 
 const AddProduct = ()=>{
 
@@ -39,8 +38,20 @@ const AddProduct = ()=>{
         redirectToProfile 
     } = values
 
+    //load catrgories and set form data
+    const init = () =>{
+        getCategories()
+        .then((data) =>{
+            if(data.error){
+                setValues({...values,error : data.error})
+            }else{
+                setValues({...values,categories : data , formData : new FormData()}) //sending formdata to API (by creating instance of form)
+            }
+        })
+    } 
+    
     useEffect(() =>{
-        setValues({...values,formData : new FormData()}) //sending formdata to API (by creating instance of form)
+        init() 
     },[])
 
     const handleChange = (name) => (event) =>{
@@ -66,12 +77,34 @@ const AddProduct = ()=>{
                     quantity : "",
                     shipping : "",
                     category : "",
-                    error : "",
                     createdProduct : data.name,
                     loading : false
                 })
             }
         })
+        // event.target.reset()
+    }
+
+    const showError = () => {
+        return (
+            <div className="alert alert-danger" style={{display : error ? "" : "none"}}>{error}</div>
+        )
+    }
+
+    const showSuccess = ()=>{
+        return (
+            <div className="alert alert-success" style={{display : createdProduct ? "" : "none"}}>
+                <h4>New Product {`${createdProduct}`} is created</h4>
+            </div>
+        )
+    }
+
+    const showLoading = () =>{
+        return (
+            loading && <div className="alert alert-success">
+                <h4>Loading ... </h4>
+            </div>
+        )
     }
 
     const productForm = () => {
@@ -95,8 +128,14 @@ const AddProduct = ()=>{
                     <label className="text-muted">Select Category</label>
 
                     <select onChange={handleChange('category')} className="form-control"> 
-                        <option value="607021941ee41b6a2c839803">Node Js</option> 
-                        <option value="607021941ee41b6a2c839803">Node Js a dvanced</option> 
+                        <option>Select Category</option>
+                            
+                            {categories && categories.map((c,i)=>{
+                                return (
+                                    <option key={i} value={c._id}>{c.name}</option>
+                                )
+                            })} 
+                       
                     </select>
 
                 </div>
@@ -133,10 +172,18 @@ const AddProduct = ()=>{
     }
 
     return (
-        <Layout title="Create Product" description="Create your product here" className="container jumbotron">
-            {productForm()}
+        <Layout title="Create Product" description="Create your product here" className="">
+            <div className="row">
+                <div className="col-md-8 offset-md-2">
+                    {showLoading()}
+                    {showError()}
+                    {showSuccess()}
+                    {productForm()}
+                </div>
+            </div>
         </Layout>
     )
 }
 
 export default AddProduct
+

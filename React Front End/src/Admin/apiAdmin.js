@@ -23,7 +23,8 @@ export const createProduct = (userId, token, product) => {
         method: 'POST',
         headers: {
             Accept: 'application/json', //'Content-Type : form data (default)
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            // 'Content-Type' : 'form-data'
         },
         body: product
     })
@@ -34,3 +35,18 @@ export const createProduct = (userId, token, product) => {
             console.log(err);
         });
 };
+
+
+export const getCategories = () => {
+    return fetch(`${API}/categories`,{
+        method : "GET"
+    })
+    .then((response) =>{
+        return response.json()
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
+}
+
+

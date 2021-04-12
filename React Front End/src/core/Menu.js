@@ -22,6 +22,10 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
                     <Link className="nav-link" to="/" style={isActive(props.history,"/")}>Home</Link>
                 </li>
 
+                 <li className="nav-item">
+                    <Link className="nav-link" to="/shop" style={isActive(props.history,"/shop")}>Shop</Link>
+                </li>
+
                 
                 {isAuthenticated() && isAuthenticated().user.role === 0 && (
                     <li className="nav-item">
