@@ -13,7 +13,7 @@ const Card = ({product}) =>{
 
                 <div className="card-body">
                     <ImageCard product={product} url="product"/>
-                    <p>{product.description}</p>
+                    <p>{product.description.substring(1,50)}</p>
                     <p>${product.price}</p>
                 </div>
 

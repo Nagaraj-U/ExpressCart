@@ -121,7 +121,7 @@ const AddProduct = ()=>{
 
                 <div className="form-group">
                     <label className="text-muted">Name</label>
-                    <input onChange={handleChange('name')} className="form-control" type="text" value={name} />
+                    <input onChange={handleChange('name')} className="form-control" type="text" value={name} autoFocus/>
                 </div>
 
                 <div className="form-group">
