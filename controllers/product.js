@@ -56,7 +56,9 @@ exports.create = (req,res) => {
 }
 
 exports.productById = (req,res,next,id)=>{ //takes 4 paramaters
-    Product.findById(id).exec((err,product)=>{
+    Product.findById(id)
+    .populate("category")
+    .exec((err,product)=>{
         if(err || !product){
             return res.status(400).json({
                 error : "No such product found"
@@ -267,4 +269,31 @@ exports.photo = (req,res,next)=>{
         return res.send(req.product.photo.data)
     }
     next()
+}
+
+
+//returns products based on user types in search bar and category choosen in home page (requires database search)
+exports.listSearchBar = (req,res) =>{
+    const query = {
+        name :"", //schema fields
+        category : ""
+    } //for this object for db search
+
+    if(req.query.search){
+        query.name = {$regex : req.query.search , $options : "i"} //regex provided by mongoose ie matches "/name/" and "i" : case insensitive
+
+        if(req.query.category && req.query.category != "all"){ //if user choses particular category from dropdown
+            query.category = req.query.category
+        }
+
+        Product.find(query,(err,products) =>{
+        if(err){
+            return res.status(400).json({
+                error : errorHandler(err)
+            })
+        }
+        res.json(products)
+        })
+        .select("-photo") 
+    }
 }
