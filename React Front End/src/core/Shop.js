@@ -118,7 +118,9 @@ const Shop = () =>{
                         {
                             filteredProducts.map((product,index) => {
                                 return (
-                                    <Card product={product}/>
+                                    <div className="col-4 mb-3">
+                                        <Card product={product}/>
+                                    </div>
                                 )
                             })
                         }
