@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import {Link,withRouter} from "react-router-dom"
 import { isAuthenticated, signout } from "../auth"
+import {countItems} from "./cartHelper"
 
 //highlighting current page with different color in navbar
 const isActive = (history,path)=>{  //hisory : comes with props ,  path : manually sending path 
@@ -24,6 +25,12 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
 
                  <li className="nav-item">
                     <Link className="nav-link" to="/shop" style={isActive(props.history,"/shop")}>Shop</Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to="/cart" style={isActive(props.history,"/cart")}>
+                        Cart <sup><small className="cart-badge">{countItems()}</small></sup>
+                    </Link>
                 </li>
 
                 
