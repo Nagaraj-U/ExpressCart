@@ -282,7 +282,7 @@ exports.listSearchBar = (req,res) =>{
     if(req.query.search){
         query.name = {$regex : req.query.search , $options : "i"} //regex provided by mongoose ie matches "/name/" and "i" : case insensitive
 
-        if(req.query.category && req.query.category != "all"){ //if user choses particular category from dropdown
+        if(req.query.category && req.query.category !== "all"){ //if user choses particular category from dropdown
             query.category = req.query.category
         }
 
