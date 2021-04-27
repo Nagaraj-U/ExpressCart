@@ -11,13 +11,12 @@ const gateway = new braintree.BraintreeGateway({
 })
 
 
-const generateToken = (req,res) =>{
+exports.generateToken = (req,res) =>{
     gateway.clientToken.generate({},function(err,response){
         if(err){
             return res.status(500).send(response)
         }else{
             res.send(response)
         }
-        
     })
 }
