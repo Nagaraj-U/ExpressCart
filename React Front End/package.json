@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "braintree-web-drop-in-react": "^1.2.1",
     "dotenv": "^8.2.0",
     "moment": "^2.29.1",
     "query-string": "^7.0.0",
