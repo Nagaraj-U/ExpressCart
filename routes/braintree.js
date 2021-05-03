@@ -3,9 +3,10 @@ const router = express.Router()
 
 const {isAuth,requireSignin} = require("../controllers/auth")
 const {userById} = require("../controllers/user")
-const {generateToken} = require("../controllers/braintree")
+const {generateToken,processPayment} = require("../controllers/braintree")
 
 router.get("/braintree/getToken/:userId",requireSignin,isAuth,generateToken); //order of middlewares is important
+router.post("/braintree/payment/:userId",requireSignin,isAuth,processPayment); 
 router.param("userId",userById) 
 
 
