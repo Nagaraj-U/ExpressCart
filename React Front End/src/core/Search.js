@@ -63,7 +63,7 @@ const Search = () =>{
                             <select className="btn mr-2" onChange={handleChange("category")}>
                                 <option value="all" >choose category</option>
                                 {
-                                    categories.map((c,index)=>{
+                                    categories && categories.map((c,index)=>{
                                         return (
                                             <option key={index} value={c._id}>{c.name}</option>
                                         )
@@ -105,7 +105,7 @@ const Search = () =>{
                 </h3>
                 <div className="row">
                 {
-                    results.map((product,index) =>{
+                    results && results.map((product,index) =>{
                         return (
                             <div className="col-4 mb-3">
                                 <Card product={product} key={index} />

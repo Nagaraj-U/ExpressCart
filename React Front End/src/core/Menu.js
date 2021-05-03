@@ -29,7 +29,7 @@ const Menu = (props) =>{    //default prop comes with BrowserRouter
 
                 <li className="nav-item">
                     <Link className="nav-link" to="/cart" style={isActive(props.history,"/cart")}>
-                        Cart <sup><small className="cart-badge">{countItems()}</small></sup>
+                        🛒Cart <sup><small className="cart-badge">{countItems()}</small></sup>
                     </Link>
                 </li>
 

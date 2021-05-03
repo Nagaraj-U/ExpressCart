@@ -5,6 +5,7 @@ import {getCartItems,removeItem} from "./cartHelper"
 import Card from "./ProductCard"
 import Checkout from "./Checkout"
 
+
 /*
 When increment, decrement, removal of product happens in Card component, we are successfully updating localstorage cart.
  However we also need to inform the parent, in this case Cart component about the change so that we can run useEffect.
@@ -56,6 +57,8 @@ const Cart = () =>{
             </div>
         )
     }
+
+
 
     return (
         <Layout title="shoping cart" description="manage your cart" className="container-fluid" >
