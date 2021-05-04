@@ -297,3 +297,26 @@ exports.listSearchBar = (req,res) =>{
         .select("-photo") 
     }
 }
+
+
+//sold : incresed by item count from frontend client , quantity (left) decreased by count
+exports.increaseCountDecreaseQuantity = (req,res,next) =>{
+    let bulkOptions = req.body.order.products.map((product) =>{
+       return {
+           updateOne : {
+               filter : {_id : product._id},
+               update : {$inc : {quantity : -product.count , sold : +product.count}}
+           }
+       }
+    })
+
+    Product.bulkWrite(bulkOptions,{},(err,res) =>{
+        if(err){
+            return res.status(400).json({
+                error : "error while setting sold count and quantity left"
+            })
+        }
+        next()
+    })
+}
+
