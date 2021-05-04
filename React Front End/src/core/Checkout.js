@@ -57,9 +57,10 @@ const Checkout = ({products}) =>{
                                 //create order before empty cart
                                 const orderData = {
                                     products : products,
-                                    transactin_id : response.transaction.id,
-                                    amount : response.amount,
-                                    time : response.transaction.updatedAt
+                                    transaction_id : response.transaction.id,
+                                    amount : parseInt(response.transaction.amount),
+                                    updated : response.transaction.createdAt,
+                                    address : data.address
                                 }
                                 createOrder(userId,token,orderData)
                                 // console.log(orderData);

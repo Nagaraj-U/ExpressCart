@@ -126,7 +126,7 @@ export const createOrder = (userId,token,orderData) => {
             "Content-Type" : "application/json",
             Authorization : `Bearer ${token}`
         },
-        body : JSON.stringify(orderData)
+        body : JSON.stringify({order : orderData})
     })
     .then((response) => {
         return response.json()
