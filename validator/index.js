@@ -1,4 +1,5 @@
 //express validator
+
 exports.userSignupValidator = (req,res,next)=>{
     req.check("name","Name is required").notEmpty()
 
