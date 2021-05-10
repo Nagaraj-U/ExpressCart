@@ -305,7 +305,7 @@ exports.increaseCountDecreaseQuantity = (req,res,next) =>{
        return {
            updateOne : {
                filter : {_id : product._id},
-               update : {$inc : {quantity : -product.count , sold : +product.count}}
+               update : {$inc : {quantity : -product.count , sold : +product.count}} //count : count of user purchased products
            }
        }
     })
