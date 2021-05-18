@@ -12,10 +12,10 @@ const AdminDashboard = () =>{
         return (
             <div className="card">
                 <h4 className="card-header">Admin Links</h4>
-                <ul className="list-group">
+                <ul className="list-group" style={{"fontSize" : "17px"}}>
 
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/create/category">Create Categoty</Link>
+                        <Link className="nav-link" to="/create/category" >Create Categoty</Link>
                     </li>
 
                     <li className="list-group-item">
@@ -23,7 +23,11 @@ const AdminDashboard = () =>{
                     </li>
 
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/admin/orders">View Orders</Link>
+                        <Link className="nav-link" to="/admin/orders" > View Orders</Link>
+                    </li>
+
+                    <li className="list-group-item">
+                        <Link className="nav-link" to="/admin/manage/products">Manage Products</Link>
                     </li>
 
                 </ul>

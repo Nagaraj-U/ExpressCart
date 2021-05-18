@@ -1,12 +1,13 @@
 import Layout from "../core/Layout"
 import React,{useState,useEffect} from "react"
-import {listOrders} from "./apiAdmin"
+import {listOrders,getStatusValues,updateStatus} from "./apiAdmin"
 import {isAuthenticated} from "../auth/index"
 import moment from "moment"
 
 const Orders = () =>{
 
     const [orders,setOrders] = useState([])
+    const [statusValues,setStatusValues] = useState([])
 
     const user = isAuthenticated().user
     const userId = isAuthenticated().user._id
@@ -24,8 +25,20 @@ const Orders = () =>{
         })
     }
 
+    const loadStatusValues = () =>{
+        getStatusValues(userId,token)
+        .then((data)=>{
+            if(data.error){
+                console.log(data.error);
+            }else{
+                setStatusValues(data)
+            }
+        })
+    }
+
     useEffect(() =>{
         loadOrders()
+        loadStatusValues()
     },[])
 
     const showOrdersLength = (orders) =>{
@@ -50,6 +63,37 @@ const Orders = () =>{
         )
     }
 
+    const handleStatusChange = (e,orderId) =>{
+        console.log("status updated");
+        updateStatus(userId,token,orderId,e.target.value)
+        .then((data)=>{
+            if(data.error){
+                console.log(data.error);
+            }else{
+                loadOrders()
+            }
+        })
+
+    }
+    const showStatus = (o) =>{
+        return (
+            <div className="form-group">
+                <h6 className="mb-1">Status : {o.status}</h6>
+                <select onChange={(e) => (handleStatusChange(e,o._id))}>
+                <option>Update status</option>
+                {
+                    statusValues.map((status,index) =>{
+                        return(
+                            <option key={index} value={status}>{status}</option>
+                        )
+                    })
+                }
+
+                </select>
+            </div>
+        )
+    }
+
     return (
         <Layout title="Orders" description={`Welcome ${user.name} , Manage Your orders here`}>
             {showOrdersLength(orders)}
@@ -67,10 +111,7 @@ const Orders = () =>{
                                                <h5 className="card-title mt-9">Ordered By  :  {order.user.name.charAt(0).toUpperCase() + order.user.name.slice(1)}</h5>
                                                 {/* <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
                                                 <ul className="list-group mb-2">
-                                                    <li className="list-item mb-2">
-                                                        status : {order.status}
-                                                    </li>
-
+                                                    
                                                     <li className="list-item mb-2">
                                                         Transaction ID : {order.transaction_id}
                                                     </li>
@@ -82,6 +123,12 @@ const Orders = () =>{
                                                     <li className="list-item mb-2">
                                                         Addresss : {order.address}
                                                     </li>
+
+                                                    <li className="list-item mb-2">
+                                                        {/* status : {order.status} */}
+                                                        {showStatus(order)}
+                                                    </li>
+
 
                                                     <li className="list-item mb-2">
                                                         Ordered on : {moment(order.updated).fromNow()}

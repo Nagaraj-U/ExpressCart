@@ -13,6 +13,8 @@ import Shop from "./core/Shop"
 import SingleProuduct from "./core/SingleProduct"
 import Cart from "./core/Cart"
 import Orders from "./Admin/Order"
+import Profile from "./user/Profile"
+import ManageProducts from "./Admin/ManageProducts"
 
 
 
@@ -25,10 +27,12 @@ const Routes = ()=>{
                 <Route path="/signin" exact component={Signin}/>
                 <Route path="/signup" exact component={Signup}/>
                 <PrivateRoute path="/user/dashboard" exact component={Dashboard}></PrivateRoute>
+                <PrivateRoute path="/profile/:userId" exact component={Profile}></PrivateRoute>
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}></AdminRoute>
                 <AdminRoute path="/create/category" exact component={AddCategory}></AdminRoute>
                 <AdminRoute path="/create/product" exact component={AddProduct}></AdminRoute>    
                 <AdminRoute path="/admin/orders" exact component={Orders}></AdminRoute>    
+                <AdminRoute path="/admin/manage/products" exact component={ManageProducts}></AdminRoute>    
                 <Route path="/product/:productId" exact component={SingleProuduct} />
                 <Route path="/cart" exact component={Cart} />
             </Switch>
